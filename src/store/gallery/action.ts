@@ -9,7 +9,7 @@ export const actionTypes: IActionTypes = {
 
 export const galleryFetch = (): IAction => ({ type: actionTypes.fetch });
 export const galleryOnload = (): IAction => ({ type: actionTypes.onload });
-export const galleryLoaded = (payload: any): IAction => ({ type: actionTypes.onload, payload });
+export const galleryLoaded = (payload: any): IAction => ({ type: actionTypes.loaded, payload });
 export const galleryFailed = (payload: any): IAction => ({ type: actionTypes.failed, payload });
 
 interface IActionTypes {

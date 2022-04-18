@@ -1,12 +1,15 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import axios from 'axios';
 import { actionTypes, galleryFailed, galleryLoaded, galleryOnload } from './action';
+import { IPhoto } from '../../interfaces';
 
 const API = 'https://jsonplaceholder.typicode.com/photos';
+// Synthetic delay
+const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
-async function fetchPhotosFromApi() {
+async function fetchPhotosFromApi(url: string) {
   try {
-    return await axios.get(API, {
+    return await axios.get(url, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -19,13 +22,16 @@ async function fetchPhotosFromApi() {
   }
 }
 
-function* fetchPhotosWorker(): Generator<any, any, any> {
+function* fetchPhotosWorker() {
   yield put(galleryOnload());
-  try {
-    const data = yield call(fetchPhotosFromApi);
+  yield call(delay, 2000);
+
+  const data: IPhoto[] | Error = yield call(fetchPhotosFromApi, API);
+
+  if (data instanceof Error) {
+    yield put(galleryFailed(data.message));
+  } else {
     yield put(galleryLoaded(data));
-  } catch (e) {
-    yield put(galleryFailed(e));
   }
 }
 

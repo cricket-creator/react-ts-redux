@@ -12,13 +12,15 @@ export const galleryReducer = (state = defaultState, { type, payload }: IAction)
     case actionTypes.onload:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: null
       };
     case actionTypes.loaded:
       return {
         ...state,
         loading: false,
-        photos: [...state.photos, ...payload]
+        photos: [...payload],
+        error: null
       };
     case actionTypes.failed:
       return {
@@ -34,5 +36,5 @@ export const galleryReducer = (state = defaultState, { type, payload }: IAction)
 export interface IGalleryReducer {
   loading: boolean;
   photos: IPhoto[];
-  error: any;
+  error: string | null;
 }
