@@ -1,0 +1,36 @@
+.menu {
+    width: 200px;
+    height: 100vh;
+    border-right: 2px solid #cecece;
+    /* flexbox */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    /* position */
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+
+    &.open {
+        display: flex;
+        /* animation */
+        animation-name: showMenu;
+        animation-timing-function: ease;
+        animation-duration: 1000ms;
+    }
+
+    & button {
+        width: 100px;
+    }
+}
+
+@keyframes showMenu {
+    from {
+        left: -200px;
+    }
+    to {
+        left: 0;
+    }
+}
