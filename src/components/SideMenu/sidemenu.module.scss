@@ -1,5 +1,7 @@
+$sideMenuWidth: 200px;
+
 .menu {
-    width: 200px;
+    width: $sideMenuWidth;
     height: 100vh;
     border-right: 2px solid #cecece;
     /* flexbox */
@@ -28,7 +30,7 @@
 
 @keyframes showMenu {
     from {
-        left: -200px;
+        left: -$sideMenuWidth;
     }
     to {
         left: 0;

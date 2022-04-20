@@ -1,9 +1,9 @@
-import { IAction, IPhoto } from '../../interfaces';
+import { CategoryType, IAction } from '../../interfaces';
 import { actionTypes } from './action';
 
 export const defaultState: IGalleryReducer = {
   loading: false,
-  photos: [],
+  categories: [],
   error: null
 };
 
@@ -19,22 +19,23 @@ export const galleryReducer = (state = defaultState, { type, payload }: IAction)
       return {
         ...state,
         loading: false,
-        photos: [...payload],
+        categories: [...payload],
         error: null
       };
     case actionTypes.failed:
       return {
         ...state,
         loading: false,
+        categories: [],
         error: payload
       };
     default:
-      return { ...state };
+      return state;
   }
 };
 
 export interface IGalleryReducer {
   loading: boolean;
-  photos: IPhoto[];
+  categories: CategoryType[] | [];
   error: string | null;
 }
